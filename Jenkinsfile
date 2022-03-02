@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'I am building ... ' BUILD_ID
+                echo 'I am building ... '
+                echo BUILD_ID
             }
         }
         stage('Test') {
             steps {
-                echo 'I am testing... ' JOB_NAME
+                echo 'I am testing... '
+                echo JOB_NAME
             }
         }
         stage('Deploy') {
