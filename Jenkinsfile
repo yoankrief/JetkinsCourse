@@ -10,6 +10,7 @@ pipeline {
                 echo 'I am building ... '
                 echo BUILD_ID
                 sh '''
+                cd simple_webserver
                 aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.eu-west-2.amazonaws.com
                 docker build -t flask-app-yoan .
                 docker tag flask-app-yoan:latest 352708296901.dkr.ecr.eu-west-2.amazonaws.com/flask-app-yoan:latest
