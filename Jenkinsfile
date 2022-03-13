@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Test') {
             when {
-            allOf {changeRequest();}
+            anyOf {changeRequest(); CHANGE_TARGET 'dev'}
 
             }
             steps {
