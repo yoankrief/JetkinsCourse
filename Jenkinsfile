@@ -24,7 +24,7 @@ pipeline {
             }
         }
         stage('Test') {
-        when {changeRequest()}
+        //when {changeRequest()}
             steps {
                 echo JOB_NAME
                 sh '''
