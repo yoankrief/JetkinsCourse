@@ -10,7 +10,7 @@ class TestFlaskWebServer(unittest.TestCase):
         self.fail("shouldn't happen")
 
     def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO2')
+        self.assertEqual('foo'.upper(), 'FOO')
 
     def test_hello(self):
         results = hello('Dan')
