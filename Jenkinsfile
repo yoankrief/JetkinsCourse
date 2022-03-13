@@ -1,20 +1,27 @@
 pipeline {
     agent any
 
+    environment {
+        AWS_URL = '352708296901.dkr.ecr.eu-west-2.amazonaws.com'
+    }
+
     stages {
         stage('Build') {
             when {
-                branch 'master'
+                anyOf {
+                    branch 'master'
+                    branch 'dev'
+                }
             }
             steps {
                 echo 'I am building ... '
                 echo BUILD_ID
                 sh '''
                 cd simple_webserver
-                aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.eu-west-2.amazonaws.com
+                aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin $AWS_URL
                 docker build -t flask-app-yoan .
-                docker tag flask-app-yoan:latest 352708296901.dkr.ecr.eu-west-2.amazonaws.com/flask-app-yoan:latest
-                docker push 352708296901.dkr.ecr.eu-west-2.amazonaws.com/flask-app-yoan:latest
+                docker tag flask-app-yoan:latest $AWS_URL/flask-app-yoan:latest
+                docker push $AWS_URL/flask-app-yoan:latest
                 '''
             }
         }
