@@ -26,7 +26,12 @@ pipeline {
         }
         stage('Test') {
             when {
-                changeRequest target: 'dev'
+                anyOf {
+                        branch 'master'
+                        branch 'dev'
+                    }
+
+                //changeRequest target: 'dev'
 
             }
             steps {
