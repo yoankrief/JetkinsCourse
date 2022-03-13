@@ -28,6 +28,7 @@ pipeline {
             steps {
                 echo JOB_NAME
                 sh '''
+                    cd ..
                     PYTHONPATH=. ./venv/Scripts/python.exe -m pytest --junitxml results.xml simple_webserver/tests
                 '''
             }
