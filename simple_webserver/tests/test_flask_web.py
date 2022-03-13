@@ -3,6 +3,7 @@ from simple_webserver.app import hello
 
 # run by `PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests`
 
+
 class TestFlaskWebServer(unittest.TestCase):
     @unittest.skip("demonstrating skipping")
     def test_skipped(self):

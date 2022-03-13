@@ -29,6 +29,7 @@ pipeline {
             steps {
                 echo 'I am testing... '
                 echo JOB_NAME
+                sh "junit allowEmptyResults: true, testResults: 'results.xml'"
             }
         }
         stage('Deploy') {
