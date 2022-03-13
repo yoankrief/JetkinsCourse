@@ -28,8 +28,9 @@ pipeline {
             steps {
                 echo JOB_NAME
                 sh '''
-                    cd ..
-                    PYTHONPATH=. ./venv/Scripts/python.exe -m pytest --junitxml results.xml simple_webserver/tests
+                    cd simple_webserver
+                    pip3 install -r requirements.txt
+                    PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests
                 '''
             }
         }
