@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                     cd simple_webserver
                     pip3 install -r requirements.txt
-                    PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests
+                    PYTHONPATH=. python3 -m pytest --junitxml results.xml ./tests
                 '''
             }
         }
