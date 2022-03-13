@@ -24,10 +24,14 @@ pipeline {
             }
         }
         stage('Test') {
-            when {branch 'master'}
+            when {
+            allOf {changeRequest();}
+
+            }
             steps {
                 echo JOB_NAME
                 sh '''
+                    printenv
                     pip3 install -r simple_webserver/requirements.txt
                     PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests
                 '''
