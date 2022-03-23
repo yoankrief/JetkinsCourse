@@ -54,8 +54,9 @@ pipeline {
                 echo 'Finally deploying...'
                 sh '''
                     aws eks update-kubeconfig --region eu-west-2 --name cicd-mar22-k8s
-                    REGISTRY_URL=${AWS_URL}//flask-app-yoan:0.0.${BUILD_ID}
-                    sed -i "s/{{REGISTRY_URL}}/$REGISTRY_URL/g" ./k8s/simple-web-server.yaml
+                    IMAGE_NAME=flask-app-yoan:0.0.${BUILD_ID}
+                    sed -i "s/{{AWS_URL}}/$AWS_URL/g" ./k8s/simple-web-server.yaml
+                    sed -i "s/{{IMAGE_NAME}}/$IMAGE_NAME/g" ./k8s/simple-web-server.yaml
                     kubectl apply -f ./k8s/simple-web-server.yaml
 
 

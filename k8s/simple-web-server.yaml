@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simple-web-server
-          image: {{REGISTRY_URL}}
+          image: {{AWS_URL}}/{{IMAGE_NAME}}
 ---
 apiVersion: v1
 kind: Service
