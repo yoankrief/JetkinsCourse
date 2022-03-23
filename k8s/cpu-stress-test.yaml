@@ -12,6 +12,4 @@ spec:
           cpu: "500m"
         requests:
           cpu: "1m"
-      args:
-        - -cpus
-        - "1"
+      args: [-cpus, "1"]

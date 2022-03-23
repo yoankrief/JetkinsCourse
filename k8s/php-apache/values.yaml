@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: 228281126655.dkr.ecr.us-east-1.amazonaws.com/php-apache
+  repository: k8s.gcr.io/hpa-example
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.1"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -62,15 +62,17 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
    limits:
-     cpu: 1000m
-   requests:
      cpu: 500m
+#     memory: 128Mi
+   requests:
+     cpu: 200m
+#     memory: 128Mi
 
 autoscaling:
   enabled: true
   minReplicas: 1
-  maxReplicas: 50
-  targetCPUUtilizationPercentage: 50
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}

@@ -1,0 +1,4 @@
+extraPlugins: "rabbitmq_auth_backend_ldap rabbitmq_delayed_message_exchange"
+
+persistence:
+  size: 10Gi
