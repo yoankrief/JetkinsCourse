@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simple-web-server
-          image: public.ecr.aws/t0g1s4n9/testsimplewebserver:1.0
+          image: {REGISTRY_URL}
 ---
 apiVersion: v1
 kind: Service
