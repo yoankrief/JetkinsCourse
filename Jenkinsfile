@@ -52,6 +52,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Finally deploying...'
+                sh '''
+                    aws eks update-kubeconfig --region eu-west-2 --name cicd-mar22-k8s
+                    kubectl apply -f ./k8s/simple-web-server.yaml
+                '''
             }
         }
     }

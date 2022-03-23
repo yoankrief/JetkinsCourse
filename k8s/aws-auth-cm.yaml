@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::352708296901:role/cicd-mar22-k8s-node-role
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+    - rolearn: arn:aws:iam::352708296901:role/JenkinsAdmin
+      username: jenkins
+      groups:
+        - system:masters
+  mapUsers: |
+    - userarn: arn:aws:iam::352708296901:user/CICD1
+      username: roman
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD2
+      username: matan
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD3
+      username: yuval
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD4
+      username: rachel
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD5
+      username: natan
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD6
+      username: roy
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD7
+      username: yoan
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD8
+      username: meitalg
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::352708296901:user/CICD9
+      username: meitald
+      groups:
+        - system:masters
