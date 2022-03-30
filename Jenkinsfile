@@ -8,11 +8,12 @@ pipeline {
 
     stages {
         stage('Create venv'){
-            sh '''
-                python3 -m venv ./venv
-                source ./venv/bin/activate
-
-            '''
+        steps {
+                sh '''
+                    python3 -m venv ./venv
+                    source ./venv/bin/activate
+                '''
+            }
         }
 
         stage('Artifactory config'){
