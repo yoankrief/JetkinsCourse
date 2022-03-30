@@ -118,8 +118,8 @@ pipeline {
             steps {
                 sh '''
                     cd package_demo
-                    pip3 install wheel
-                    python3 setup.py sdist bdist_wheel
+                    pip install wheel
+                    python setup.py sdist bdist_wheel
                 '''
             }
         }
