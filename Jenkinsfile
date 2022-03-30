@@ -41,7 +41,20 @@ pipeline {
                 }
             }
 
+            environment{
+                JFROG_AR_TOCKEN = credentials('jfrog-secret')
+            }
+
+
+
             steps {
+                sh '''
+                cd simple_webserver
+                    echo "[global]
+                    index-url = Jenkins:$JFROG_AR_TOCKEN@yoankrief.jfrog.io/artifactory/api/pypi/dependencies-pypi/simple
+                    " > pip.conf
+                '''
+
                 rtPipInstall (
                     resolverId: "pip-default",
                     args: "-r simple_webserver/requirements.txt",
