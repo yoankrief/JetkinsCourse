@@ -46,9 +46,8 @@ pipeline {
                     resolverId: "pip-default",
                     args: "-r simple_webserver/requirements.txt",
                 )
-            }
 
-            steps {
+
                 sh 'printenv'
                 sh '''
                 cd simple_webserver
