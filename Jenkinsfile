@@ -126,6 +126,7 @@ pipeline {
 
         stage ('Package publish') {
             steps {
+
                 rtUpload (
                     serverId: 'artifactory-yoan',
                     spec: '''{
