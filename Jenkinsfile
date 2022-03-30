@@ -13,6 +13,7 @@ pipeline {
                     branch 'dev'
                 }
             }
+
             steps {
                 sh 'printenv'
                 sh '''
