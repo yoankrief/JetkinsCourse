@@ -117,9 +117,10 @@ pipeline {
        stage ('Package and create distribution archives') {
             steps {
                 sh '''
+                    ./venv/bin/pip install wheel
                     cd package_demo
                     pip install wheel
-                    python setup.py sdist bdist_wheel
+                    ../venv/bin/python setup.py sdist bdist_wheel
                 '''
             }
         }
