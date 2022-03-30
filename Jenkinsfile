@@ -76,8 +76,8 @@ pipeline {
                 echo JOB_NAME
                 sh 'printenv'
                 sh '''
-                    pip3 install -r simple_webserver/requirements.txt
-                    PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests
+                    ./venv/bin/pip install -r simple_webserver/requirements.txt
+                    PYTHONPATH=. ./venv/bin/python -m pytest --junitxml results.xml simple_webserver/tests
                 '''
             }
             post {
