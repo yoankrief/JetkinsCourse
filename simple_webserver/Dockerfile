@@ -6,3 +6,4 @@ ENV PIP_CONFIG_FILE /pip.conf
 RUN pip install -r requirements.txt
 
 CMD ["python", "app.py"]
+
