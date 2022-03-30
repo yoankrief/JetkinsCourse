@@ -38,8 +38,6 @@ pipeline {
                         branch 'dev'
                     }
 
-                //changeRequest target: 'dev'
-
             }
             steps {
                 echo JOB_NAME
@@ -49,26 +47,38 @@ pipeline {
                     PYTHONPATH=. python3 -m pytest --junitxml results.xml simple_webserver/tests
                 '''
             }
-
             post {
                 always{
                     junit allowEmptyResults: true, testResults: 'results.xml'
                 }
             }
         }
+
         stage('Deploy') {
-            steps {
-                echo 'Finally deploying...'
-                sh '''
-                    aws eks update-kubeconfig --region eu-west-2 --name cicd-mar22-k8s
-                    IMAGE_NAME=flask-app-yoan:0.0.${BUILD_ID}
-                    sed -i "s/{{AWS_URL}}/$AWS_URL/g" ./k8s/simple-web-server.yaml
-                    sed -i "s/{{IMAGE_NAME}}/$IMAGE_NAME/g" ./k8s/simple-web-server.yaml
-                    kubectl apply -f ./k8s/simple-web-server.yaml
-
-
-                '''
+            parallel{
+                stage('Stage 1') {
+                    steps {
+                        echo 'step1'
+                        sh '''
+                            aws eks update-kubeconfig --region eu-west-2 --name cicd-mar22-k8s
+                            IMAGE_NAME=flask-app-yoan:0.0.${BUILD_ID}
+                            sed -i "s/{{AWS_URL}}/$AWS_URL/g" ./k8s/simple-web-server.yaml
+                            sed -i "s/{{IMAGE_NAME}}/$IMAGE_NAME/g" ./k8s/simple-web-server.yaml
+                            kubectl apply -f ./k8s/simple-web-server.yaml
+                        '''
+                    }
+                }
+                stage('Stage 2') {
+                    steps {
+                        echo 'step2'
+                     }
+                     post {
+                        always {
+                            jiraSendDeploymentInfo environmentId: 'us-prod-1', environmentName: 'us-prod-1', environmentType: 'production'
+                        }
+                    }
+                }
             }
-        }
+       }
     }
 }
