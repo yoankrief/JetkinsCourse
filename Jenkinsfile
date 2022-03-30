@@ -113,5 +113,33 @@ pipeline {
                 }
             }
        }
+
+       stage ('Package and create distribution archives') {
+            steps {
+                sh '''
+                    cd package_demo
+                    pip install wheel
+                    python setup.py sdist bdist_wheel
+                '''
+            }
+        }
+
+        stage ('Package publish') {
+            steps {
+                rtUpload (
+                    serverId: 'artifactory-yoan',
+                    spec: '''{
+                          "files": [
+                            {
+                              "pattern": "package_demo/",
+                              "target": "fantastic-pypi"
+                            }
+                         ]
+                    }'''
+
+
+                )
+            }
+        }
     }
 }
