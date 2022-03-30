@@ -10,8 +10,8 @@ pipeline {
         stage('Create venv'){
         steps {
                 sh '''
-                    python3 -m venv ./venv
-                    source ./venv/bin/activate
+                    #python3 -m venv ./venv
+                    #source ./venv/bin/activate
                 '''
             }
         }
@@ -119,7 +119,6 @@ pipeline {
                 sh '''
                     ./venv/bin/pip install wheel
                     cd package_demo
-                    pip install wheel
                     ../venv/bin/python setup.py sdist bdist_wheel
                 '''
             }
